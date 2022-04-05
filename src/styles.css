@@ -1,17 +1,17 @@
-.webix_template {
+.text-align {
   text-align: center;
 }
 
-.webix_template_connected {
+.text-align-status {
   text-align: center;
   color: #13be1d;
 }
 
-.webix_list {
+.list-bg-color {
   background-color:#eeeeee;
 }
 
-.text_connected {
+.text-status {
   font-size: 16px;
   font-weight: 500;
 }

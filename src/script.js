@@ -1,12 +1,12 @@
 var header = {
   view: "toolbar", css: "webix_dark", paddingX: 10, gravity: 1, 
   cols: [
-    { view: "label", label: "My App", width: 100 },
+    { view: "label", label: "My App" },
     { },
     { 
       view: "button", 
       label: '<span class="webix_icon wxi-user"></span><span>Profile</span>', 
-      width: 90, 
+      width: 100, 
       align: "right", 
       css: "webix_transparent"
     }
@@ -23,15 +23,16 @@ var sideMenu = {
       scroll: false,
       data: [ "Dashboard", "Users", "Products", "Locations" ],
       gravity: 1,
+      css: "list-bg-color"
     },
     { },
     {
       view: "label", 
-      template: "<span class='webix_icon wxi-check'></span><span class='text_connected'>Connected</span>", 
-      css: "webix_template_connected"
+      template: "<span class='webix_icon wxi-check'></span><span class='text-status'>Connected</span>", 
+      css: "text-align-status"
     }
   ],
-  css: "webix_list"
+  css: "list-bg-color"
 }
 
 var movieDataTable = {
@@ -71,7 +72,7 @@ var inputForm = {
 var footer = {
   view: "template",
   template: "The software is provided by <a href='https://webix.com'>https://webix.com</a>. All rights reserved (c)",
-  css: "webix_template"
+  css: "text-align",
 }
 
 webix.ready(function(){
