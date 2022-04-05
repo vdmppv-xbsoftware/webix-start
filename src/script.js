@@ -3,8 +3,13 @@ var header = {
   cols:[
     { view:"label", label:"My App", width:100 },
     {},
-    { view:"icon", icon:"wxi-user", width:20 },
-    { view:"label", label:"Profile", width:50 }
+    { 
+      view:"button", 
+      label:'<span class="webix_icon wxi-user"></span><span>Profile</span>', 
+      width:90, 
+      align:"right", 
+      css: "webix_transparent"
+    }
   ]
 };
 
