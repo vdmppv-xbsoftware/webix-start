@@ -1,4 +1,4 @@
-var header = {
+let header = {
   view: "toolbar", css: "webix_dark", paddingX: 10, gravity: 1, 
   cols: [
     { view: "label", label: "My App" },
@@ -13,7 +13,7 @@ var header = {
   ]
 };
 
-var sideMenu = {
+let sideMenu = {
   paddingY: 10,
   rows: [
     {
@@ -35,14 +35,14 @@ var sideMenu = {
   css: "list-bg-color"
 }
 
-var movieDataTable = {
+let movieDataTable = {
   view: "datatable", 
   autoConfig: true,
   gravity: 6,
   data: small_film_set,
 }
 
-var inputForm = {
+let inputForm = {
   view: "form",
   margin: 10,
   gravity: 2,
@@ -69,7 +69,7 @@ var inputForm = {
   ],
 };
 
-var footer = {
+let footer = {
   view: "template",
   template: "The software is provided by <a href='https://webix.com'>https://webix.com</a>. All rights reserved (c)",
   css: "text-align",
