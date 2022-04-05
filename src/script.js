@@ -1,65 +1,67 @@
 var header = {
-  view:"toolbar", css:"webix_dark", paddingX:10, gravity:1, 
-  cols:[
-    { view:"label", label:"My App", width:100 },
-    {},
+  view: "toolbar", css: "webix_dark", paddingX: 10, gravity: 1, 
+  cols: [
+    { view: "label", label: "My App", width: 100 },
+    { },
     { 
-      view:"button", 
-      label:'<span class="webix_icon wxi-user"></span><span>Profile</span>', 
-      width:90, 
-      align:"right", 
+      view: "button", 
+      label: '<span class="webix_icon wxi-user"></span><span>Profile</span>', 
+      width: 90, 
+      align: "right", 
       css: "webix_transparent"
     }
   ]
 };
 
-var sideList = {
+var sideMenu = {
   paddingY: 10,
-  rows:[
+  rows: [
     {
-      view:"list",
-      select:true,
+      view: "list",
+      select: true,
       borderless: true,
       scroll: false,
-      data:[ "Dashboard", "Users", "Products", "Locations" ],
+      data: [ "Dashboard", "Users", "Products", "Locations" ],
       gravity: 1,
     },
-    {},
+    { },
     {
       view: "label", 
       template: "<span class='webix_icon wxi-check'></span><span class='text_connected'>Connected</span>", 
-      css:"webix_template_connected"
+      css: "webix_template_connected"
     }
   ],
   css: "webix_list"
 }
 
-var movieData = {
-  view:"datatable", 
-  autoConfig:true,
+var movieDataTable = {
+  view: "datatable", 
+  autoConfig: true,
   gravity: 6,
-  data:small_film_set,
+  data: small_film_set,
 }
 
 var inputForm = {
-  view:"form",
+  view: "form",
   margin: 10,
   gravity: 2,
-  rows:[ 
-    { template:"EDIT FILMS", type:"section"},
-    { view:"text", label:"Title", value:"" },
-    { view:"text", label:"Year", value:"" },
-    { view:"text", label:"Rating", value:"" },
-    { view:"text", label:"Votes", value:"" },
-    { margin:10, cols:[
+  rows: [ 
+    { template: "EDIT FILMS", type: "section"},
+    { view: "text", label: "Title", value: "" },
+    { view: "text", label: "Year", value: "" },
+    { view: "text", label: "Rating", value: "" },
+    { view: "text", label: "Votes", value: "" },
+    { 
+      margin: 10, 
+      cols: [
       {
-        view:"button", 
-        value:"Add new", 
-        css:"webix_primary"
+        view: "button", 
+        value: "Add new", 
+        css: "webix_primary"
       },
       {
-        view:"button", 
-        value:"Clear"
+        view: "button", 
+        value: "Clear"
       }
       ] 
     }
@@ -74,13 +76,13 @@ var footer = {
 
 webix.ready(function(){
   webix.ui({
-    rows:[
+    rows: [
       header,
       { 
-        cols:[
-          sideList,
+        cols: [
+          sideMenu,
           { view:"resizer"},
-          movieData,
+          movieDataTable,
           inputForm
         ], 
         minHeight:680},
