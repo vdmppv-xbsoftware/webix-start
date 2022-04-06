@@ -21,6 +21,7 @@ let sideMenu = {
     {
       view: "list",
       select: true,
+      borderless: true,
       scroll: false,
       data: [ "Dashboard", "Users", "Products", "Locations" ],
       gravity: 1,
