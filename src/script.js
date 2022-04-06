@@ -1,3 +1,11 @@
+const MOVIE_DATATABLE_ID = "movie_datatable";
+const MOVIE_INPUTFORM_ID = "movie_inputform";
+const BTN_ADD_ID = "btn_add";
+const BTN_CLR_ID = "btn_clr";
+const PROFILE_POPUP_ID = "profile_popup"
+
+const currentYear = new Date().getFullYear();
+
 let header = {
   view: "toolbar", 
   css: "webix_dark", 
@@ -17,7 +25,7 @@ let header = {
       width: 100, 
       align: "right", 
       css: "webix_transparent",
-      popup: "profile_popup"
+      popup: PROFILE_POPUP_ID
     }
   ]
 };
@@ -46,17 +54,15 @@ let sideMenu = {
 
 let movieDataTable = {
   view: "datatable",
-  id: "movie_datatable", 
+  id: MOVIE_DATATABLE_ID, 
   autoConfig: true,
   gravity: 6,
   data: small_film_set,
 }
 
-const currentYear = new Date().getFullYear();
-
 let inputForm = {
   view: "form",
-  id: "movie_inputform",
+  id: MOVIE_INPUTFORM_ID,
   margin: 10,
   gravity: 2,
   rows: [ 
@@ -66,7 +72,6 @@ let inputForm = {
     },
     { 
       view: "text", 
-      id: "inp_title", 
       name: "title", 
       label: "Title", 
       value: "", 
@@ -74,23 +79,20 @@ let inputForm = {
     },
     { 
       view: "text", 
-      id:"inp_year", 
       name: "year", 
       label: "Year", 
       value: "", 
       invalidMessage: `Year should be between 1970 and ${currentYear}` 
     },
     { 
-      view: "text", 
-      id:"inp_rating", 
+      view: "text",  
       name: "rating", 
       label: "Rating", 
       value: "", 
-      invalidMessage: "Rating should be between 0 and 10"
+      invalidMessage: "Rating should be between 1 and 10"
     },
     { 
       view: "text", 
-      id:"inp_votes", 
       name: "votes", 
       label: "Votes", 
       value: "", 
@@ -100,14 +102,14 @@ let inputForm = {
       margin: 10, 
       cols: [
         {
-          id: "btn_add",
+          id: BTN_ADD_ID,
           view: "button", 
           value: "Add new", 
           css: "webix_primary",
           click: addItem
         },
         {
-          id: "btn_clr",
+          id: BTN_CLR_ID,
           view: "button", 
           value: "Clear",
           click: clearForm
@@ -117,10 +119,10 @@ let inputForm = {
     { }
   ],
   rules: {
-    title:webix.rules.isNotEmpty,
-    year:function(value){ return (value >= 1970 && value <= currentYear) },
-    rating:function(value){ return (value >= 0 && value <= 10) },
-    votes:function(value){ return (value > 0 && value < 100000) },
+    title: webix.rules.isNotEmpty,
+    year: value => (1970 <= value && value <= currentYear),
+    rating: value => (0 < value && value <= 10),
+    votes: value => (0 < value && value <= 100000),
   },
 };
 
@@ -132,20 +134,21 @@ let footer = {
 }
 
 function addItem(){
-  let movieInputForm = $$("movie_inputform");
+  let movieInputForm = $$(MOVIE_INPUTFORM_ID);
   if ( movieInputForm.validate() ) {
-    let movieItemData = movieInputForm.getValues();
-    $$("movie_datatable").add(movieItemData);
+    const movieItemData = movieInputForm.getValues();
+    $$(MOVIE_DATATABLE_ID).add(movieItemData);
     webix.message("Movie added successfully!", "success", 1500);
   }
 };
 
 function clearForm(){
-  webix.confirm("Are you sure you want to clean the form?", "confirm-warning").then(function() {
-    let movieInputForm = $$("movie_inputform");
+  webix.confirm("Are you sure you want to clean the form?", "confirm-warning").then(() => {
+    let movieInputForm = $$(MOVIE_INPUTFORM_ID);
     movieInputForm.clear();
     movieInputForm.clearValidation();
-  });
+  }
+  );
 };
 
 webix.ready(function(){
@@ -165,7 +168,7 @@ webix.ready(function(){
   });
   webix.ui({
     view: "popup",
-    id: "profile_popup",
+    id: PROFILE_POPUP_ID,
     width: 300,
     body: {
       view: "list", 
