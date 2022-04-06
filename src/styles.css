@@ -1,0 +1,22 @@
+.align-center {
+  text-align: center;
+}
+
+.label-status-connected {
+  color: #13be1d;
+}
+
+.sidemenu-bg-color {
+  background-color:#eeeeee;
+}
+
+.sidemenu-bg-color .webix_list_item {
+  border-color: transparent;
+}
+
+.text-status {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
