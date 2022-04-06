@@ -1,9 +1,8 @@
-.text-align {
+.align-center {
   text-align: center;
 }
 
-.text-align-status {
-  text-align: center;
+.label-status-connected {
   color: #13be1d;
 }
 

@@ -31,7 +31,7 @@ let sideMenu = {
     {
       view: "label", 
       template: "<span class='webix_icon wxi-check'></span><span class='text-status'>Connected</span>", 
-      css: "text-align-status"
+      css: "align-center label-status-connected"
     }
   ],
   css: "list-bg-color"
@@ -49,7 +49,7 @@ let inputForm = {
   margin: 10,
   gravity: 2,
   rows: [ 
-    { template: "EDIT FILMS", type: "section"},
+    { template: "EDIT FILMS", type: "section" },
     { view: "text", label: "Title", value: "" },
     { view: "text", label: "Year", value: "" },
     { view: "text", label: "Rating", value: "" },
@@ -57,15 +57,15 @@ let inputForm = {
     { 
       margin: 10, 
       cols: [
-      {
-        view: "button", 
-        value: "Add new", 
-        css: "webix_primary"
-      },
-      {
-        view: "button", 
-        value: "Clear"
-      }
+        {
+          view: "button", 
+          value: "Add new", 
+          css: "webix_primary"
+        },
+        {
+          view: "button", 
+          value: "Clear"
+        }
       ] 
     },
     { }
@@ -75,7 +75,7 @@ let inputForm = {
 let footer = {
   view: "template",
   template: "The software is provided by <a href='https://webix.com'>https://webix.com</a>. All rights reserved (c)",
-  css: "text-align",
+  css: "align-center",
   autoheight: true
 }
 
@@ -86,7 +86,7 @@ webix.ready(function(){
       { 
         cols: [
           sideMenu,
-          { view:"resizer"},
+          { view:"resizer" },
           movieDataTable,
           inputForm
         ], 
