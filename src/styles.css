@@ -11,6 +11,12 @@
   background-color:#eeeeee;
 }
 
+.list-item-bg-color {
+  background-color:#eeeeee;
+  border-color: transparent;
+}
+
+
 .text-status {
   font-size: 16px;
   font-weight: 500;

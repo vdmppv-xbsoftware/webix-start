@@ -5,7 +5,9 @@ let header = {
     { },
     { 
       view: "button", 
-      label: '<span class="webix_icon wxi-user"></span><span>Profile</span>', 
+      label: "Profile", 
+      type: "icon", 
+      icon: "wxi-user",
       width: 100, 
       align: "right", 
       css: "webix_transparent"
@@ -23,7 +25,7 @@ let sideMenu = {
       scroll: false,
       data: [ "Dashboard", "Users", "Products", "Locations" ],
       gravity: 1,
-      css: "list-bg-color"
+      css: "list-item-bg-color"
     },
     { },
     {
@@ -65,7 +67,8 @@ let inputForm = {
         value: "Clear"
       }
       ] 
-    }
+    },
+    { }
   ],
 };
 
@@ -73,6 +76,7 @@ let footer = {
   view: "template",
   template: "The software is provided by <a href='https://webix.com'>https://webix.com</a>. All rights reserved (c)",
   css: "text-align",
+  autoheight: true
 }
 
 webix.ready(function(){
@@ -86,7 +90,7 @@ webix.ready(function(){
           movieDataTable,
           inputForm
         ], 
-        minHeight:680},
+      },
       footer
     ]
   });
