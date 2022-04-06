@@ -25,7 +25,8 @@ let sideMenu = {
       scroll: false,
       data: [ "Dashboard", "Users", "Products", "Locations" ],
       gravity: 1,
-      css: "list-item-bg-color"
+      autoheight: true,
+      css: "list-bg-color"
     },
     { },
     {
@@ -34,7 +35,7 @@ let sideMenu = {
       css: "align-center label-status-connected"
     }
   ],
-  css: "list-bg-color"
+  css: "sidemenu-bg-color"
 }
 
 let movieDataTable = {
