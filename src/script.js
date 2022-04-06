@@ -1,7 +1,13 @@
 let header = {
-  view: "toolbar", css: "webix_dark", paddingX: 10, gravity: 1, 
+  view: "toolbar", 
+  css: "webix_dark", 
+  paddingX: 10, 
+  gravity: 1, 
   cols: [
-    { view: "label", label: "My App" },
+    { 
+      view: "label", 
+      label: "My App" 
+    },
     { },
     { 
       view: "button", 
@@ -11,7 +17,7 @@ let header = {
       width: 100, 
       align: "right", 
       css: "webix_transparent",
-      popup: "my_popup"
+      popup: "profile_popup"
     }
   ]
 };
@@ -46,7 +52,7 @@ let movieDataTable = {
   data: small_film_set,
 }
 
-let currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear();
 
 let inputForm = {
   view: "form",
@@ -54,7 +60,10 @@ let inputForm = {
   margin: 10,
   gravity: 2,
   rows: [ 
-    { template: "EDIT FILMS", type: "section" },
+    { 
+      template: "EDIT FILMS", 
+      type: "section" 
+    },
     { 
       view: "text", 
       id: "inp_title", 
@@ -107,7 +116,7 @@ let inputForm = {
     },
     { }
   ],
-  rules:{
+  rules: {
     title:webix.rules.isNotEmpty,
     year:function(value){ return (value >= 1970 && value <= currentYear) },
     rating:function(value){ return (value >= 0 && value <= 10) },
@@ -123,19 +132,19 @@ let footer = {
 }
 
 function addItem(){
-  let movieForm = $$("movie_inputform");
-  if ( movieForm.validate() ) {
-    let itemData = $$("movie_inputform").getValues();
-    $$("movie_datatable").add(itemData);
+  let movieInputForm = $$("movie_inputform");
+  if ( movieInputForm.validate() ) {
+    let movieItemData = movieInputForm.getValues();
+    $$("movie_datatable").add(movieItemData);
     webix.message("Movie added successfully!", "success", 1500);
   }
 };
 
 function clearForm(){
   webix.confirm("Are you sure you want to clean the form?", "confirm-warning").then(function() {
-    let movieForm = $$("movie_inputform");
-    movieForm.clear();
-    movieForm.clearValidation();
+    let movieInputForm = $$("movie_inputform");
+    movieInputForm.clear();
+    movieInputForm.clearValidation();
   });
 };
 
@@ -154,10 +163,9 @@ webix.ready(function(){
       footer
     ]
   });
-
   webix.ui({
     view: "popup",
-    id: "my_popup",
+    id: "profile_popup",
     width: 300,
     body: {
       view: "list", 
@@ -165,5 +173,5 @@ webix.ready(function(){
       autoheight: true,
       select: true
     }
-  })
+  });
 });
