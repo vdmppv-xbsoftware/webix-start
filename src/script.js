@@ -10,7 +10,8 @@ let header = {
       icon: "wxi-user",
       width: 100, 
       align: "right", 
-      css: "webix_transparent"
+      css: "webix_transparent",
+      popup: "my_popup"
     }
   ]
 };
@@ -38,38 +39,80 @@ let sideMenu = {
 }
 
 let movieDataTable = {
-  view: "datatable", 
+  view: "datatable",
+  id: "movie_datatable", 
   autoConfig: true,
   gravity: 6,
   data: small_film_set,
 }
 
+let currentYear = new Date().getFullYear();
+
 let inputForm = {
   view: "form",
+  id: "movie_inputform",
   margin: 10,
   gravity: 2,
   rows: [ 
     { template: "EDIT FILMS", type: "section" },
-    { view: "text", label: "Title", value: "" },
-    { view: "text", label: "Year", value: "" },
-    { view: "text", label: "Rating", value: "" },
-    { view: "text", label: "Votes", value: "" },
+    { 
+      view: "text", 
+      id: "inp_title", 
+      name: "title", 
+      label: "Title", 
+      value: "", 
+      invalidMessage: "Title cannot be empty" 
+    },
+    { 
+      view: "text", 
+      id:"inp_year", 
+      name: "year", 
+      label: "Year", 
+      value: "", 
+      invalidMessage: `Year should be between 1970 and ${currentYear}` 
+    },
+    { 
+      view: "text", 
+      id:"inp_rating", 
+      name: "rating", 
+      label: "Rating", 
+      value: "", 
+      invalidMessage: "Rating should be between 0 and 10"
+    },
+    { 
+      view: "text", 
+      id:"inp_votes", 
+      name: "votes", 
+      label: "Votes", 
+      value: "", 
+      invalidMessage: "Votes should be between 1 and 100000" 
+    },
     { 
       margin: 10, 
       cols: [
         {
+          id: "btn_add",
           view: "button", 
           value: "Add new", 
-          css: "webix_primary"
+          css: "webix_primary",
+          click: addItem
         },
         {
+          id: "btn_clr",
           view: "button", 
-          value: "Clear"
+          value: "Clear",
+          click: clearForm
         }
       ] 
     },
     { }
   ],
+  rules:{
+    title:webix.rules.isNotEmpty,
+    year:function(value){ return (value >= 1970 && value <= currentYear) },
+    rating:function(value){ return (value >= 0 && value <= 10) },
+    votes:function(value){ return (value > 0 && value < 100000) },
+  },
 };
 
 let footer = {
@@ -78,6 +121,23 @@ let footer = {
   css: "align-center",
   autoheight: true
 }
+
+function addItem(){
+  let movieForm = $$("movie_inputform");
+  if ( movieForm.validate() ) {
+    let itemData = $$("movie_inputform").getValues();
+    $$("movie_datatable").add(itemData);
+    webix.message("Movie added successfully!", "success", 1500);
+  }
+};
+
+function clearForm(){
+  webix.confirm("Are you sure you want to clean the form?", "confirm-warning").then(function() {
+    let movieForm = $$("movie_inputform");
+    movieForm.clear();
+    movieForm.clearValidation();
+  });
+};
 
 webix.ready(function(){
   webix.ui({
@@ -94,4 +154,16 @@ webix.ready(function(){
       footer
     ]
   });
+
+  webix.ui({
+    view: "popup",
+    id: "my_popup",
+    width: 300,
+    body: {
+      view: "list", 
+      data: [ "Settings", "Log out" ],
+      autoheight: true,
+      select: true
+    }
+  })
 });
