@@ -10,11 +10,7 @@
   background-color:#eeeeee;
 }
 
-.list-bg-color {
-  background-color:#eeeeee;
-}
-
-.list-bg-color .webix_list_item {
+.sidemenu-bg-color .webix_list_item {
   border-color: transparent;
 }
 

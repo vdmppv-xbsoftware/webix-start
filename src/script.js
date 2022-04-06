@@ -26,7 +26,7 @@ let sideMenu = {
       data: [ "Dashboard", "Users", "Products", "Locations" ],
       gravity: 1,
       autoheight: true,
-      css: "list-bg-color"
+      css: "sidemenu-bg-color"
     },
     { },
     {
