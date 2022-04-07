@@ -54,16 +54,14 @@ const usersList = {
           return false;
         }
       },
-      on: {
-        onBeforeRender() {
-          $$(USER_LIST_ID).find((obj) => {
+      ready() {
+          this.data.each((obj) => {
             if (obj.id >= 1 && obj.id <= HIGHLATED_ITEMS_AMOUNT) {
               obj.$css = "marker";
             }
           });
         }
       }
-    }
   ]
 }
 
