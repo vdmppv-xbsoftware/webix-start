@@ -65,6 +65,7 @@ let inputForm = {
   id: MOVIE_INPUTFORM_ID,
   margin: 10,
   gravity: 2,
+  minWidth: 350,
   rows: [ 
     { 
       template: "EDIT FILMS", 
@@ -139,6 +140,7 @@ function addItem(){
     const movieItemData = movieInputForm.getValues();
     $$(MOVIE_DATATABLE_ID).add(movieItemData);
     webix.message("Movie added successfully!", "success", 1500);
+    movieInputForm.clear();
   }
 };
 
@@ -147,11 +149,21 @@ function clearForm(){
     let movieInputForm = $$(MOVIE_INPUTFORM_ID);
     movieInputForm.clear();
     movieInputForm.clearValidation();
-  }
-  );
+  });
 };
 
 webix.ready(function(){
+  webix.ui({
+    view: "popup",
+    id: PROFILE_POPUP_ID,
+    width: 300,
+    body: {
+      view: "list", 
+      data: [ "Settings", "Log out" ],
+      autoheight: true,
+      select: true
+    }
+  });
   webix.ui({
     rows: [
       header,
@@ -165,16 +177,5 @@ webix.ready(function(){
       },
       footer
     ]
-  });
-  webix.ui({
-    view: "popup",
-    id: PROFILE_POPUP_ID,
-    width: 300,
-    body: {
-      view: "list", 
-      data: [ "Settings", "Log out" ],
-      autoheight: true,
-      select: true
-    }
   });
 });
