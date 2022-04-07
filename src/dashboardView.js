@@ -40,11 +40,11 @@ let movieDataTable = {
     }
   ],
   on: {
-    onAfterSelect: movieItemToForm
+    onAfterSelect: setMovieValues
   },
   hover: "datatable-hover",
   onClick: {
-  	"wxi-trash": function(e, id) {
+  	"wxi-trash"(e, id) {
       this.remove(id);
       return false;
     }
@@ -145,7 +145,7 @@ function clearForm(){
   });
 };
 
-function movieItemToForm(id){
+function setMovieValues(id){
   let movieItem = $$(MOVIE_DATATABLE_ID).getItem(id);
   $$(MOVIE_INPUTFORM_ID).setValues(movieItem);
 }

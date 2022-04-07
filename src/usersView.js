@@ -2,6 +2,7 @@ const USER_LIST_ID = "user_list";
 const SORT_ASC_BTN_ID = 'sort_asc';
 const SORT_DESC_BTN_ID = 'sort_desc';
 const INPUT_USER_TEXT_ID = 'input_user';
+const HIGHLATED_ITEMS_AMOUNT = 5;
 
 const usersList = {
   padding: 10,
@@ -14,8 +15,8 @@ const usersList = {
           view: "text",
           gravity: 5,
           on: {
-            onTimedKeypress: function(){
-              var text = this.getValue().toString().toLowerCase();
+            onTimedKeypress() {
+              let text = this.getValue().toLowerCase();
               $$(USER_LIST_ID).filter("#name#", text);
             }
           }
@@ -25,7 +26,7 @@ const usersList = {
           id: SORT_ASC_BTN_ID,
           label: "Sort asc",
           css: "webix_primary",
-          click: function(){
+          click() {
             $$(USER_LIST_ID).sort("#name#", "asc", "string")
           }
         },
@@ -34,7 +35,7 @@ const usersList = {
           id: SORT_DESC_BTN_ID,
           label: "Sort dsc",
           css: "webix_primary",
-          click: function(){
+          click() {
             $$(USER_LIST_ID).sort("#name#", "desc", "string")
           }
         }
@@ -48,16 +49,18 @@ const usersList = {
       borderless: true,
       template: "#name# from #country# <div class='webix_icon wxi-close'></div>",
       onClick: {
-        "wxi-close": function(e, id) {
+        "wxi-close"(e, id) {
           this.remove(id);
           return false;
         }
       },
       on: {
-        onBeforeRender: function(){
-          for (let i = 1; i <= 5; i++){
-            $$(USER_LIST_ID).addCss(i, "marker", true);
-          }
+        onBeforeRender() {
+          $$(USER_LIST_ID).find((obj) => {
+            if (obj.id >= 1 && obj.id <= HIGHLATED_ITEMS_AMOUNT) {
+              obj.$css = "marker";
+            }
+          });
         }
       }
     }

@@ -20,7 +20,7 @@ const productsView = {
     }
   ],
   select: true,
-  ready: function(){
+  ready() {
     this.openAll();
   }
 }
