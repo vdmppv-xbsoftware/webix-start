@@ -68,7 +68,7 @@ let main = {
     },
     { 
       id: "Users", 
-      template: "Users view"
+      rows: [usersList, usersChart]
     },
     { 
       id: "Products", 

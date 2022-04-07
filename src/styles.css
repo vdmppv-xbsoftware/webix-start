@@ -19,7 +19,7 @@
   font-weight: 500;
 }
 
-.datatable-hover {
+.datatable-hover, .marker {
   background-color: rgba(100, 149, 237, 0.4);
 }
 
