@@ -5,6 +5,7 @@ const INPUT_USER_TEXT_ID = 'input_user';
 
 const usersList = {
   padding: 10,
+  margin: 5,
   rows: [
     {
       margin: 10,
