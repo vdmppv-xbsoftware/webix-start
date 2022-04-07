@@ -45,6 +45,7 @@ const usersList = {
       view: "list",
       id: USER_LIST_ID,
       url: "../data/users.js",
+      css: "user-list",
       select: true,
       borderless: true,
       template: "#name# from #country# <div class='webix_icon wxi-close'></div>",
@@ -54,14 +55,14 @@ const usersList = {
           return false;
         }
       },
-      ready() {
-          this.data.each((obj) => {
-            if (obj.id >= 1 && obj.id <= HIGHLATED_ITEMS_AMOUNT) {
-              obj.$css = "marker";
-            }
-          });
-        }
-      }
+      // ready() {
+      //   this.data.each((obj) => {
+      //     if (obj.id >= 1 && obj.id <= HIGHLATED_ITEMS_AMOUNT) {
+      //       obj.$css = "marker";
+      //     }
+      //   });
+      // }
+    }
   ]
 }
 
