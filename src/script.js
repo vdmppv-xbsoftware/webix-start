@@ -72,7 +72,7 @@ let main = {
     },
     { 
       id: "Products", 
-      template: "Products view" 
+      rows: [productsView]
     },
     { 
       id: "Admin", 
