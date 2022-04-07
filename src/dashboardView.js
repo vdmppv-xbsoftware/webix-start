@@ -32,8 +32,7 @@ let movieDataTable = {
     },
     { 
       id: "votes", 
-      header: ['Votes', { content: "textFilter" }], 
-      sort: "string" 
+      header: ['Votes', { content: "textFilter" }],  
     },
     {  
       template: "{common.trashIcon()}",  

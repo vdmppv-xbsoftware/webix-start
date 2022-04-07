@@ -33,7 +33,10 @@ let sideMenu = {
       select: true,
       borderless: true,
       scroll: false,
-      data: [ "Dashboard", "Users", "Products", "Locations" ],
+      data: [ "Dashboard", "Users", "Products", "Admin" ],
+      on: {
+        onAfterSelect: (id) => $$(id).show()
+      },
       gravity: 1,
       css: "sidemenu-bg-color"
     },
@@ -65,7 +68,7 @@ let main = {
     },
     { 
       id: "Users", 
-      template: "Users view" 
+      template: "Users view"
     },
     { 
       id: "Products", 
