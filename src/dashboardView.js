@@ -6,14 +6,25 @@ const BTN_CLR_ID = "btn_clr";
 const currentYear = new Date().getFullYear();
 
 const movieTabBar = {
-  view: "tabbar", 
-  id: 'tabbar', 
+  view: "tabbar",  
   multiview: true,
   options: [
-    { value: 'All', id: 'all_movies_view' },
-    { value: 'Old', id: 'old_movies_view' },
-    { value: 'Modern', id: 'modern_movies_view' },
-    { value: 'New', id: 'new_movies_view' },
+    { 
+      value: "All", 
+      id: "all_movies_view" 
+    },
+    { 
+      value: "Old", 
+      id: "old_movies_view" 
+    },
+    { 
+      value: "Modern", 
+      id: "modern_movies_view" 
+    },
+    { 
+      value: "New", 
+      id: "new_movies_view" 
+    },
   ]
 }
 

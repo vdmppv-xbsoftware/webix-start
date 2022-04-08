@@ -82,6 +82,11 @@ let main = {
   ]
 }
 
+webix.protoUI({
+  name: "userlist"
+}, webix.EditAbility, webix.ui.list);
+
+
 webix.ready(function(){
   webix.ui({
     view: "popup",
@@ -100,11 +105,20 @@ webix.ready(function(){
       { 
         cols: [
           sideMenu,
-          { view:"resizer" },
+          { view: "resizer" },
           main
         ], 
       },
       footer
     ]
+  });
+
+  $$(USER_CHART_ID).sync($$(USER_LIST_ID), () => {
+    $$(USER_CHART_ID).group({
+      by: "country",
+      map: {
+        country: ["country", "count"]
+      }
+    })
   });
 });

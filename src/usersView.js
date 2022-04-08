@@ -1,8 +1,20 @@
 const USER_LIST_ID = "user_list";
+const USER_CHART_ID = "user_chart";
 const SORT_ASC_BTN_ID = 'sort_asc';
 const SORT_DESC_BTN_ID = 'sort_desc';
 const ADD_USER_BTN_UD = 'add_user';
 const HIGHLATED_ITEMS_AMOUNT = 5;
+
+const countriesData = [
+	{ "id": 1, "value": "Germany" },
+	{ "id": 2, "value": "USA" },
+	{ "id": 3, "value": "Canada" },
+	{ "id": 4, "value": "France" },
+	{ "id": 5, "value": "China" },
+	{ "id": 6, "value": "Russia" },
+	{ "id": 7, "value": "Italy" },
+	{ "id": 8, "value": "Spain" }
+];
 
 const usersList = {
   padding: 10,
@@ -48,7 +60,7 @@ const usersList = {
             $$(USER_LIST_ID).add({
               name: "Vadim Popov",
               age: Math.floor(Math.random() * 41) + 20, 
-              country: "Belarus",
+              country: (countriesData[Math.floor(Math.random() * 8) + 1].value),
             })
           }
         }
@@ -85,17 +97,16 @@ const usersList = {
 
 const usersChart = {
   view: "chart",
-  id: "user-chart",
-  type: "bar", 
-  url: "data/users.js",
-  value: "#age#",
+  id: USER_CHART_ID,
+  type: "bar",
+  value: "#country#",
   xAxis: {
-    title: "Age",
-    template: "#age#"
-  }
+      title: "Country",
+      template: "#value#"
+  },
+  yAxis: {
+      start: 0,
+      end: 10,
+      step: 2
+  },
 }
-
-webix.protoUI(
-  { name: "userlist" },
-  webix.EditAbility, webix.ui.list
-);
