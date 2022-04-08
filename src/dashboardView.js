@@ -3,6 +3,11 @@ const MOVIE_INPUTFORM_ID = "movie_inputform";
 const BTN_ADD_ID = "btn_add";
 const BTN_CLR_ID = "btn_clr";
 
+const ALL_MOVIES_ID = "all_movies";
+const OLD_MOVIES_ID = "old_movies";
+const MODERN_MOVIES_ID = "modern_movies";
+const NEW_MOVIES_ID = "new_movies"; 
+
 const currentYear = new Date().getFullYear();
 
 const movieTabBar = {
@@ -11,21 +16,37 @@ const movieTabBar = {
   options: [
     { 
       value: "All", 
-      id: "all_movies_view" 
+      id: ALL_MOVIES_ID
     },
     { 
       value: "Old", 
-      id: "old_movies_view" 
+      id: OLD_MOVIES_ID 
     },
     { 
       value: "Modern", 
-      id: "modern_movies_view" 
+      id: MODERN_MOVIES_ID
     },
     { 
       value: "New", 
-      id: "new_movies_view" 
+      id: NEW_MOVIES_ID
     },
-  ]
+  ],
+  on: {
+    onChange(value){
+      $$(MOVIE_DATATABLE_ID).filter((obj) => {
+        switch (value) {
+          case OLD_MOVIES_ID:
+            return obj.year < 1989;
+          case MODERN_MOVIES_ID:
+            return 1989 <= obj.year && obj.year <= 1999;
+          case NEW_MOVIES_ID:
+            return obj.year >= 2000;
+          default:
+            return obj;
+        }
+      })
+    }
+  }
 }
 
 let movieDataTable = {
