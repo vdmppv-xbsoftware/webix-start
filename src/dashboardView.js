@@ -5,6 +5,18 @@ const BTN_CLR_ID = "btn_clr";
 
 const currentYear = new Date().getFullYear();
 
+const movieTabBar = {
+  view: "tabbar", 
+  id: 'tabbar', 
+  multiview: true,
+  options: [
+    { value: 'All', id: 'all_movies_view' },
+    { value: 'Old', id: 'old_movies_view' },
+    { value: 'Modern', id: 'modern_movies_view' },
+    { value: 'New', id: 'new_movies_view' },
+  ]
+}
+
 let movieDataTable = {
   view: "datatable",
   id: MOVIE_DATATABLE_ID,
@@ -14,31 +26,49 @@ let movieDataTable = {
   columns: [
     { 
       id: "rank", 
-      header: "", 
+      header: "#", 
       sort: "int", 
       width: 50, 
       css: "rank-style" 
     },
     { 
       id: "title", 
-      header: ['Film Title', { content: "textFilter" }], 
+      header: ["Film Title", { content: "textFilter" }], 
       sort: "string", 
       fillspace: true 
     },
     { 
-      id: "year", 
-      header: ['Released', { content: "numberFilter" }], 
-      sort: "int" 
+      id: "category", 
+      header: ["Category", { content: "selectFilter" }],  
+      collection: "data/categories.js"
+    },
+    { 
+      id: "rating", 
+      header: ["Rating", { content: "numberFilter" }],
+      sort: "int"  
     },
     { 
       id: "votes", 
-      header: ['Votes', { content: "textFilter" }],  
+      header: ["Votes", { content: "textFilter" }],
+      sort: "int"  
+    },
+    { 
+      id: "year", 
+      header: ["Released", { content: "numberFilter" }], 
+      sort: "int" 
     },
     {  
       template: "{common.trashIcon()}",  
       width: 50 
     }
   ],
+  scheme: {
+    $init: (obj) => {
+      obj.category = Math.floor(Math.random() * 4 + 1);
+      obj.rating = obj.rating.replace(",", ".");
+      obj.votes = obj.votes.replace(",", "");
+    }
+  },
   on: {
     onAfterSelect: setMovieValues
   },

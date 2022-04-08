@@ -59,8 +59,11 @@ let main = {
   cells: [
     { 
       id: "Dashboard", 
-      cols: [
-        movieDataTable, 
+      cols: [ 
+        {
+          gravity: 4,
+          rows: [movieTabBar, movieDataTable] 
+        }, 
         inputForm
       ]
     },

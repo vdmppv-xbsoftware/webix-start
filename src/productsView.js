@@ -11,16 +11,23 @@ const productsView = {
       id: "title",	
       header: "Title",
       width: 250,
+      editor: "text",
       template: "{common.treetable()} #title#" 
     },
     { 
       id: "price",	
-      header: "Price",	
+      header: "Price",
+      editor: "text",	
       fillspace: true
     }
   ],
   select: "cell",
   ready() {
     this.openAll();
+  },
+  editable: true,
+  rules: {
+    title: webix.rules.isNotEmpty,
+    price: webix.rules.isNumber
   }
 }
