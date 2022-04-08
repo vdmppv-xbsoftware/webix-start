@@ -100,9 +100,6 @@ let movieDataTable = {
       obj.votes = obj.votes.replace(",", "");
     }
   },
-  on: {
-    onAfterSelect: setMovieValues
-  },
   hover: "datatable-hover",
   onClick: {
   	"wxi-trash"(e, id) {
@@ -180,16 +177,10 @@ let inputForm = {
 function addItem(){
   let movieInputForm = $$(MOVIE_INPUTFORM_ID);
   if ( movieInputForm.validate() ) {
-    const movieItemData = movieInputForm.getValues();
-    if ( movieItemData.id ) {
-      $$(MOVIE_DATATABLE_ID).updateItem(movieItemData.id, movieItemData);
-      webix.message("Movie edited successfully!", "success", 1500);
-    }
-    else {
-      $$(MOVIE_DATATABLE_ID).add(movieItemData);
-      webix.message("Movie added successfully!", "success", 1500);
-    }
+    movieInputForm.save();
+    webix.message("Movie added successfully!", "success", 1500);
     movieInputForm.clear();
+    $$(MOVIE_DATATABLE_ID).clearSelection();
   }
 };
 
@@ -198,10 +189,6 @@ function clearForm(){
     let movieInputForm = $$(MOVIE_INPUTFORM_ID);
     movieInputForm.clear();
     movieInputForm.clearValidation();
+    $$(MOVIE_DATATABLE_ID).clearSelection();
   });
 };
-
-function setMovieValues(id){
-  let movieItem = $$(MOVIE_DATATABLE_ID).getItem(id);
-  $$(MOVIE_INPUTFORM_ID).setValues(movieItem);
-}

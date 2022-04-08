@@ -121,4 +121,6 @@ webix.ready(function(){
       }
     })
   });
+
+  $$(MOVIE_INPUTFORM_ID).bind($$(MOVIE_DATATABLE_ID));
 });
