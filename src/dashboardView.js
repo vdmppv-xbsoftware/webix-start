@@ -49,13 +49,12 @@ let movieDataTable = {
     },
     { 
       id: "votes", 
-      header: ["Votes", { content: "textFilter" }],
+      header: ["Votes", { content: "numberFilter" }],
       sort: "int"  
     },
     { 
       id: "year", 
-      header: ["Released", { content: "numberFilter" }], 
-      sort: "int" 
+      header: "Year", 
     },
     {  
       template: "{common.trashIcon()}",  
