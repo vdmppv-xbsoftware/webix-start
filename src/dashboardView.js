@@ -10,7 +10,7 @@ let movieDataTable = {
   id: MOVIE_DATATABLE_ID,
   select: "row", 
   gravity: 6,
-  url: "../data/data.js",
+  url: "data/data.js",
   columns: [
     { 
       id: "rank", 

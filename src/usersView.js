@@ -44,7 +44,7 @@ const usersList = {
     {
       view: "list",
       id: USER_LIST_ID,
-      url: "../data/users.js",
+      url: "data/users.js",
       css: "user-list-item",
       select: true,
       borderless: true,

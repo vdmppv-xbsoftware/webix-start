@@ -1,6 +1,6 @@
 const productsView = {
   view: "treetable",
-  url: "../data/products.js",
+  url: "data/products.js",
   columns: [
     { 
       id: "id",	
