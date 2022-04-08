@@ -19,4 +19,12 @@
   font-weight: 500;
 }
 
+.datatable-hover, .user-list-item .webix_list_item:nth-child(-n+5) {
+  background-color: rgba(100, 149, 237, 0.4);
+}
+
+.rank-style {
+  background-color: #f4f5f9
+}
+
 
