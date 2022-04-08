@@ -45,7 +45,7 @@ const usersList = {
       view: "list",
       id: USER_LIST_ID,
       url: "../data/users.js",
-      css: "user-list",
+      css: "user-list-item",
       select: true,
       borderless: true,
       template: "#name# from #country# <div class='webix_icon wxi-close'></div>",

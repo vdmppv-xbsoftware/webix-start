@@ -4,7 +4,6 @@ let header = {
   view: "toolbar", 
   css: "webix_dark", 
   paddingX: 10, 
-  gravity: 1, 
   cols: [
     { 
       view: "label", 
@@ -37,7 +36,6 @@ let sideMenu = {
       on: {
         onAfterSelect: (id) => $$(id).show()
       },
-      gravity: 1,
       css: "sidemenu-bg-color"
     },
     { },

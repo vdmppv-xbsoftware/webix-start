@@ -16,10 +16,10 @@ const productsView = {
     { 
       id: "price",	
       header: "Price",	
-      width: 200
+      fillspace: true
     }
   ],
-  select: true,
+  select: "cell",
   ready() {
     this.openAll();
   }

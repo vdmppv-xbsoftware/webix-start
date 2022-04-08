@@ -132,11 +132,6 @@ function addItem(){
   }
 };
 
-function deleteItem(){
-  let movieItem = $$(MOVIE_DATATABLE_ID).getSelectedId();
-  $$(MOVIE_DATATABLE_ID).remove(movieItem);
-}
-
 function clearForm(){
   webix.confirm("Are you sure you want to clean the form?", "confirm-warning").then(() => {
     let movieInputForm = $$(MOVIE_INPUTFORM_ID);
