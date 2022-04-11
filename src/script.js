@@ -120,7 +120,36 @@ webix.ready(function(){
         country: ["country", "count"]
       }
     })
+
+    $$(USER_CHART_ID).sort("#country#", "desc");
   });
 
   $$(MOVIE_INPUTFORM_ID).bind($$(MOVIE_DATATABLE_ID));
+
+  $$(MOVIE_DATATABLE_ID).registerFilter(
+    $$(MOVIE_TABBAR_ID), 
+    { 
+      columnId: "year", 
+      compare(value, filter, item){
+        switch (filter) {
+          case OLD_MOVIES_ID:
+            return value < 1989;
+          case MODERN_MOVIES_ID:
+            return 1989 <= value && value <= 1999;
+          case NEW_MOVIES_ID:
+            return value >= 2000;
+          default:
+            return true;
+        }
+      }
+    },
+    { 
+      getValue(node){
+        return node.getValue();
+      },
+      setValue(node, value){
+        node.setValue(value);
+      }
+    }
+  );
 });

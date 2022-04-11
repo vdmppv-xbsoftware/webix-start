@@ -1,17 +1,19 @@
 const MOVIE_DATATABLE_ID = "movie_datatable";
 const MOVIE_INPUTFORM_ID = "movie_inputform";
-const BTN_ADD_ID = "btn_add";
+const BTN_SAVE_ID = "btn_save";
 const BTN_CLR_ID = "btn_clr";
 
 const ALL_MOVIES_ID = "all_movies";
 const OLD_MOVIES_ID = "old_movies";
 const MODERN_MOVIES_ID = "modern_movies";
-const NEW_MOVIES_ID = "new_movies"; 
+const NEW_MOVIES_ID = "new_movies";
+const MOVIE_TABBAR_ID = "movie_tabbar";
 
 const currentYear = new Date().getFullYear();
 
 const movieTabBar = {
-  view: "tabbar",  
+  view: "tabbar",
+  id: MOVIE_TABBAR_ID,  
   multiview: true,
   options: [
     { 
@@ -32,19 +34,8 @@ const movieTabBar = {
     },
   ],
   on: {
-    onChange(value){
-      $$(MOVIE_DATATABLE_ID).filter((obj) => {
-        switch (value) {
-          case OLD_MOVIES_ID:
-            return obj.year < 1989;
-          case MODERN_MOVIES_ID:
-            return 1989 <= obj.year && obj.year <= 1999;
-          case NEW_MOVIES_ID:
-            return obj.year >= 2000;
-          default:
-            return obj;
-        }
-      })
+    onChange(){
+      $$(MOVIE_DATATABLE_ID).filterByAll();
     }
   }
 }
@@ -150,11 +141,11 @@ let inputForm = {
       margin: 10, 
       cols: [
         {
-          id: BTN_ADD_ID,
+          id: BTN_SAVE_ID,
           view: "button", 
-          value: "Add new", 
+          value: "Save", 
           css: "webix_primary",
-          click: addItem
+          click: saveItem
         },
         {
           id: BTN_CLR_ID,
@@ -174,11 +165,11 @@ let inputForm = {
   },
 };
 
-function addItem(){
+function saveItem(){
   let movieInputForm = $$(MOVIE_INPUTFORM_ID);
   if ( movieInputForm.validate() ) {
     movieInputForm.save();
-    webix.message("Movie added successfully!", "success", 1500);
+    webix.message("Movie saved successfully!", "success", 1500);
     movieInputForm.clear();
     $$(MOVIE_DATATABLE_ID).clearSelection();
   }
