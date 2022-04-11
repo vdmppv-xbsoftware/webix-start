@@ -77,7 +77,7 @@ let main = {
     },
     { 
       id: "Admin", 
-      template: "Admin view" 
+      rows: [adminView]
     }
   ]
 }
@@ -152,4 +152,7 @@ webix.ready(function(){
       }
     }
   );
+
+  $$(USER_LIST_ID).sync(usersCollection);
+  $$(ADMIN_VIEW_ID).sync(categoriesCollection);
 });
