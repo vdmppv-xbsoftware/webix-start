@@ -83,13 +83,6 @@ const usersList = {
           return false;
         }
       },
-      scheme: {
-        $init: (obj) => {
-          if (obj.age < 26) {
-            obj.$css = "marked-userlist-item"
-          } 
-        }
-      },
     }
   ]
 }
