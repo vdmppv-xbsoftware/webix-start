@@ -1,9 +1,44 @@
 const MOVIE_DATATABLE_ID = "movie_datatable";
 const MOVIE_INPUTFORM_ID = "movie_inputform";
-const BTN_ADD_ID = "btn_add";
+const BTN_SAVE_ID = "btn_save";
 const BTN_CLR_ID = "btn_clr";
 
+const ALL_MOVIES_ID = "all_movies";
+const OLD_MOVIES_ID = "old_movies";
+const MODERN_MOVIES_ID = "modern_movies";
+const NEW_MOVIES_ID = "new_movies";
+const MOVIE_TABBAR_ID = "movie_tabbar";
+
 const currentYear = new Date().getFullYear();
+
+const movieTabBar = {
+  view: "tabbar",
+  id: MOVIE_TABBAR_ID,  
+  multiview: true,
+  options: [
+    { 
+      value: "All", 
+      id: ALL_MOVIES_ID
+    },
+    { 
+      value: "Old", 
+      id: OLD_MOVIES_ID 
+    },
+    { 
+      value: "Modern", 
+      id: MODERN_MOVIES_ID
+    },
+    { 
+      value: "New", 
+      id: NEW_MOVIES_ID
+    },
+  ],
+  on: {
+    onChange(){
+      $$(MOVIE_DATATABLE_ID).filterByAll();
+    }
+  }
+}
 
 let movieDataTable = {
   view: "datatable",
@@ -14,33 +49,47 @@ let movieDataTable = {
   columns: [
     { 
       id: "rank", 
-      header: "", 
+      header: "#", 
       sort: "int", 
       width: 50, 
       css: "rank-style" 
     },
     { 
       id: "title", 
-      header: ['Film Title', { content: "textFilter" }], 
+      header: ["Film Title", { content: "textFilter" }], 
       sort: "string", 
       fillspace: true 
     },
     { 
-      id: "year", 
-      header: ['Released', { content: "numberFilter" }], 
-      sort: "int" 
+      id: "category", 
+      header: ["Category", { content: "selectFilter" }],  
+      collection: "data/categories.js"
+    },
+    { 
+      id: "rating", 
+      header: ["Rating", { content: "numberFilter" }],
+      sort: "int"  
     },
     { 
       id: "votes", 
-      header: ['Votes', { content: "textFilter" }],  
+      header: ["Votes", { content: "numberFilter" }],
+      sort: "int"  
+    },
+    { 
+      id: "year", 
+      header: "Year", 
     },
     {  
       template: "{common.trashIcon()}",  
       width: 50 
     }
   ],
-  on: {
-    onAfterSelect: setMovieValues
+  scheme: {
+    $init: (obj) => {
+      obj.category = Math.floor(Math.random() * 4 + 1);
+      obj.rating = obj.rating.replace(",", ".");
+      obj.votes = obj.votes.replace(",", "");
+    }
   },
   hover: "datatable-hover",
   onClick: {
@@ -92,11 +141,11 @@ let inputForm = {
       margin: 10, 
       cols: [
         {
-          id: BTN_ADD_ID,
+          id: BTN_SAVE_ID,
           view: "button", 
-          value: "Add new", 
+          value: "Save", 
           css: "webix_primary",
-          click: addItem
+          click: saveItem
         },
         {
           id: BTN_CLR_ID,
@@ -116,19 +165,13 @@ let inputForm = {
   },
 };
 
-function addItem(){
+function saveItem(){
   let movieInputForm = $$(MOVIE_INPUTFORM_ID);
   if ( movieInputForm.validate() ) {
-    const movieItemData = movieInputForm.getValues();
-    if ( movieItemData.id ) {
-      $$(MOVIE_DATATABLE_ID).updateItem(movieItemData.id, movieItemData);
-      webix.message("Movie edited successfully!", "success", 1500);
-    }
-    else {
-      $$(MOVIE_DATATABLE_ID).add(movieItemData);
-      webix.message("Movie added successfully!", "success", 1500);
-    }
+    movieInputForm.save();
+    webix.message("Movie saved successfully!", "success", 1500);
     movieInputForm.clear();
+    $$(MOVIE_DATATABLE_ID).clearSelection();
   }
 };
 
@@ -137,10 +180,6 @@ function clearForm(){
     let movieInputForm = $$(MOVIE_INPUTFORM_ID);
     movieInputForm.clear();
     movieInputForm.clearValidation();
+    $$(MOVIE_DATATABLE_ID).clearSelection();
   });
 };
-
-function setMovieValues(id){
-  let movieItem = $$(MOVIE_DATATABLE_ID).getItem(id);
-  $$(MOVIE_INPUTFORM_ID).setValues(movieItem);
-}

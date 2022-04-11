@@ -59,8 +59,11 @@ let main = {
   cells: [
     { 
       id: "Dashboard", 
-      cols: [
-        movieDataTable, 
+      cols: [ 
+        {
+          gravity: 4,
+          rows: [movieTabBar, movieDataTable] 
+        }, 
         inputForm
       ]
     },
@@ -78,6 +81,11 @@ let main = {
     }
   ]
 }
+
+webix.protoUI({
+  name: "userlist"
+}, webix.EditAbility, webix.ui.list);
+
 
 webix.ready(function(){
   webix.ui({
@@ -97,11 +105,51 @@ webix.ready(function(){
       { 
         cols: [
           sideMenu,
-          { view:"resizer" },
+          { view: "resizer" },
           main
         ], 
       },
       footer
     ]
   });
+
+  $$(USER_CHART_ID).sync($$(USER_LIST_ID), () => {
+    $$(USER_CHART_ID).group({
+      by: "country",
+      map: {
+        country: ["country", "count"]
+      }
+    })
+
+    $$(USER_CHART_ID).sort("#country#", "desc");
+  });
+
+  $$(MOVIE_INPUTFORM_ID).bind($$(MOVIE_DATATABLE_ID));
+
+  $$(MOVIE_DATATABLE_ID).registerFilter(
+    $$(MOVIE_TABBAR_ID), 
+    { 
+      columnId: "year", 
+      compare(value, filter, item){
+        switch (filter) {
+          case OLD_MOVIES_ID:
+            return value < 1989;
+          case MODERN_MOVIES_ID:
+            return 1989 <= value && value <= 1999;
+          case NEW_MOVIES_ID:
+            return value >= 2000;
+          default:
+            return true;
+        }
+      }
+    },
+    { 
+      getValue(node){
+        return node.getValue();
+      },
+      setValue(node, value){
+        node.setValue(value);
+      }
+    }
+  );
 });
