@@ -37,7 +37,7 @@ const adminView = {
     { 
       view: "button", 
       value: "Add item", 
-      click: () => {
+      click() {
         categoriesCollection.add({ value: "Action" });
       }, 
       css: "webix_primary" 
