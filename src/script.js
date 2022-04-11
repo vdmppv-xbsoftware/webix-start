@@ -113,7 +113,7 @@ webix.ready(function(){
     ]
   });
 
-  $$(USER_CHART_ID).sync($$(USER_LIST_ID), () => {
+  $$(USER_CHART_ID).sync($$(usersCollection), () => {
     $$(USER_CHART_ID).group({
       by: "country",
       map: {

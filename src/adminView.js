@@ -22,7 +22,6 @@ const adminView = {
         },
       ],
       editable: true,
-      editAction: "click",
       rules: {
         value: webix.rules.isNotEmpty,
       },

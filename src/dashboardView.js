@@ -46,6 +46,7 @@ let movieDataTable = {
   select: "row", 
   gravity: 6,
   url: "data/data.js",
+  editable: true,
   columns: [
     { 
       id: "rank", 
@@ -63,7 +64,7 @@ let movieDataTable = {
     { 
       id: "category", 
       header: ["Category", { content: "selectFilter" }],
-      editor: "richSelect",  
+      editor: "richselect",
       collection: categoriesCollection
     },
     { 
