@@ -113,7 +113,11 @@ webix.ready(function(){
     ]
   });
 
-  $$(USER_CHART_ID).sync($$(usersCollection), () => {
+  $$(MOVIE_INPUTFORM_ID).bind($$(MOVIE_DATATABLE_ID));
+ 
+  $$(USER_LIST_ID).sync(usersCollection);
+  $$(ADMIN_VIEW_ID).sync(categoriesCollection);
+  $$(USER_CHART_ID).sync(usersCollection, () => {
     $$(USER_CHART_ID).group({
       by: "country",
       map: {
@@ -123,8 +127,6 @@ webix.ready(function(){
 
     $$(USER_CHART_ID).sort("#country#", "desc");
   });
-
-  $$(MOVIE_INPUTFORM_ID).bind($$(MOVIE_DATATABLE_ID));
 
   $$(MOVIE_DATATABLE_ID).registerFilter(
     $$(MOVIE_TABBAR_ID), 
@@ -152,7 +154,4 @@ webix.ready(function(){
       }
     }
   );
-
-  $$(USER_LIST_ID).sync(usersCollection);
-  $$(ADMIN_VIEW_ID).sync(categoriesCollection);
 });
