@@ -57,7 +57,7 @@ const usersList = {
           label: "Add user",
           css: "webix_primary",
           click() {
-            $$(USER_LIST_ID).add({
+            usersCollection.add({
               name: "Vadim Popov",
               age: Math.floor(Math.random() * 41) + 20, 
               country: (countriesData[Math.floor(Math.random() * 8) + 1].value),
@@ -69,7 +69,6 @@ const usersList = {
     {
       view: "userlist",
       id: USER_LIST_ID,
-      url: "data/users.js",
       select: true,
       template: "#name# from #country# <div class='webix_icon wxi-close'></div>",
       editable: true,
@@ -80,15 +79,8 @@ const usersList = {
       },
       onClick: {
         "wxi-close"(e, id) {
-          this.remove(id);
+          usersCollection.remove(id);
           return false;
-        }
-      },
-      scheme: {
-        $init: (obj) => {
-          if (obj.age < 26) {
-            obj.$css = "marked-userlist-item"
-          } 
         }
       },
     }
